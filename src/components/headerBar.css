@@ -1,0 +1,22 @@
+.header_bar {
+    display: flex;
+    align-items: center;
+}
+
+.search_field {
+    margin: auto;
+}
+
+.search_bar {
+    display: flex;
+  align-items: center;
+  gap: 5px;
+  margin: auto;
+  margin-bottom: 10;
+  border: 1px solid #e0e0e0;
+  padding: 5px 10px;
+  width: 40%;
+  border-radius: 8px;
+  box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%);
+  background-color: #F1F3F4;
+}

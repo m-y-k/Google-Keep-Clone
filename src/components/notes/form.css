@@ -1,0 +1,7 @@
+.color_choose {
+    display: flex;
+    align-items: center;
+    margin: 10px; 
+    margin-left: auto;
+    /* font-weight: 600; */
+}
