@@ -33,7 +33,7 @@ const Form = () => {
     const [showTextField, setShowTextField] = useState(false);
     const [addNote, setAddNote] = useState({ ...note, id: uuid() });
     const isMobile900 = useMediaQuery({ query: `(max-width: 900px)` });
-    const { setNotes } = useContext(DataContext);
+    const { notes, setNotes, setSearchNotes } = useContext(DataContext);
     
     const containerRef = useRef();
 
@@ -44,6 +44,7 @@ const Form = () => {
 
         if (addNote.heading || addNote.text) {
             setNotes(prevArr => [addNote, ...prevArr])
+            setSearchNotes(prevArr => [addNote, ...prevArr])
         }
     }
     
@@ -64,7 +65,7 @@ const Form = () => {
 
     return (
         <ClickAwayListener onClickAway={handleClickAway}>
-            <Container ref={containerRef} style={{marginBottom: '50px', marginTop: '20px'}}>
+            <Container ref={containerRef} style={{minWidth: '300px', marginBottom: '50px', marginTop: '20px'}}>
                 {   showTextField && 
                     <div className='title_field'>
                         <TextField 

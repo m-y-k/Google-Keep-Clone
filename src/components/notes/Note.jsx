@@ -22,12 +22,13 @@ const Note = ({ note, width }) => {
     const [isEditing, setIsEditing] = useState(false)
     const [isMouseOver, setIsMouseOver] = useState(false)
     const [updateNote, setUpdateNote] = useState({...note})
-    const { notes, setNotes } = useContext(DataContext);
+    const { notes, setNotes, setSearchNotes } = useContext(DataContext);
 
 
     const updateNoteFunction = () => {
         const items = notes.filter(item => item.id !== note.id)
         setNotes([updateNote, ...items])
+        setSearchNotes([updateNote, ...items])
         setIsMouseOver(false)
     }
 
@@ -49,7 +50,10 @@ const Note = ({ note, width }) => {
         // setDeleteNotes(prevArr => [note, ...prevArr]);
         const reply = prompt('This will delete the note forever!!')
         // console.log(typeof(reply))
-        if (typeof(reply) === 'string') setNotes(updatedNotes);
+        if (typeof(reply) === 'string') {
+            setNotes(updatedNotes)
+            setSearchNotes(updatedNotes)
+        };
     }
 
     const onTextChange = (e) => {

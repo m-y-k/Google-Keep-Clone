@@ -22,6 +22,7 @@ const DataProvider = ({ children }) => {
       useEffect(() => {
         localStorage.setItem('notes', JSON.stringify(notes));
         localStorage.setItem('searched', JSON.stringify(searchNotes));
+        
       }, [notes, searchNotes]);
 
     return (

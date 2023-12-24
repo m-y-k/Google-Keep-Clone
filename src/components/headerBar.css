@@ -41,14 +41,17 @@
 
 .keep-heading {
     font-size: 1.5rem;
+    margin: 0;
 }
 
 .keep-logo {
     width: 30px;
+    margin-left: 15px;
 }
 
 .hide_till_600 {
     display: inline-block;
+
 }
 
 .hide_till_800 {

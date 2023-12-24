@@ -62,7 +62,7 @@ const HeaderBar = ({ open, handleDrawer }) => {
             placeholder="Search..."
             variant="standard"
             InputProps={{ disableUnderline: true }}
-            style={{  color: '#A5A8A7', width: '100%', marginBottom: '24px'}}
+            style={{  color: '#A5A8A7', width: '100%'}}
             onChange={(e) => setSearchTerm(e.target.value)}
             name='search'  
           />
