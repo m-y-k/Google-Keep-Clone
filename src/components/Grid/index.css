@@ -1,0 +1,29 @@
+.card-item {
+    /* align-self: center; */
+    width: 100% !important;
+}
+
+.note_fields {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-top {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.card-box {
+    width: 300px;
+    margin: auto;
+}
+
+@media (min-width: 900px) {
+    .cards { grid-template-columns: repeat(3, 1fr); }
+  }
+  
+@media (min-width: 600px) {
+    .cards { grid-template-columns: repeat(2, 1fr); }
+  }
+  

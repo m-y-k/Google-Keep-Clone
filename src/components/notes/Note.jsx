@@ -10,7 +10,6 @@ import { DataContext } from '../../context/DataProvider';
 const StyledCard = styled(Card)`
     border: 1px solid #e0e0e0;
     border-radius: 8px;
-    width: 240px;
     margin: 8px;
     box-shadow: none;
 `
@@ -19,15 +18,17 @@ const Options = styled(CardActions)`
     cursor: pointer;
 `
 
-const Note = ({ note }) => {
+const Note = ({ note, width }) => {
     const [isEditing, setIsEditing] = useState(false)
+    const [isMouseOver, setIsMouseOver] = useState(false)
     const [updateNote, setUpdateNote] = useState({...note})
-    const { notes, setNotes, setAcrchiveNotes, setDeleteNotes, setSearchNotes } = useContext(DataContext);
+    const { notes, setNotes } = useContext(DataContext);
 
 
     const updateNoteFunction = () => {
         const items = notes.filter(item => item.id !== note.id)
         setNotes([updateNote, ...items])
+        setIsMouseOver(false)
     }
 
     const editNote = () => {
@@ -41,20 +42,14 @@ const Note = ({ note }) => {
         updateNoteFunction()
     }
 
-    const archiveNote = (note) => {
-        const updatedNotes = notes.filter(data => data.id !== note.id);
-        setNotes(updatedNotes);
-        setAcrchiveNotes(prevArr => [note, ...prevArr]);
-        //
-        setSearchNotes(notes)
-    }
 
     const deleteNote = (note) => {
         const updatedNotes = notes.filter(data => data.id !== note.id);
-        setNotes(updatedNotes);
-        setDeleteNotes(prevArr => [note, ...prevArr]);
-        // 
-        setSearchNotes(notes)
+        
+        // setDeleteNotes(prevArr => [note, ...prevArr]);
+        const reply = prompt('This will delete the note forever!!')
+        // console.log(typeof(reply))
+        if (typeof(reply) === 'string') setNotes(updatedNotes);
     }
 
     const onTextChange = (e) => {
@@ -63,12 +58,23 @@ const Note = ({ note }) => {
         setUpdateNote(changedNote);
     }
 
+    const handleMouseOut = () => {
+        if (isEditing) return
+        setIsMouseOver(false)
+        // setTimeout(() => {
+            
+        // }, [3000])
+    }
+
     return (
-            <StyledCard className='card-item'  style={{backgroundColor: updateNote.color}}>
+            <StyledCard className='card-item'  style={{backgroundColor: updateNote.color}}
+            onMouseOver={() => setIsMouseOver(true)}
+            onMouseOut={handleMouseOut}
+            >
                     <CardContent className='note_fields'>
                         {!isEditing ? <>
-                                <Typography style={{fontSize: '1.2rem', fontWeight: '500', marginBottom: '10px'}}>{note.heading}</Typography>
-                                <Typography>{note.text}</Typography>
+                                <Typography onMouseOver={() => setIsMouseOver(true)} style={{fontSize: '1.2rem', fontWeight: '500', marginBottom: '10px'}}>{note.heading}</Typography>
+                                <Typography onMouseOver={() => setIsMouseOver(true)}>{note.text}</Typography>
                             </> : <>
                                 <TextField 
                                     value={updateNote.heading}
@@ -77,6 +83,7 @@ const Note = ({ note }) => {
                                     style={{ marginBottom: 10 }}
                                     onChange={(e) => onTextChange(e)}
                                     name='heading'
+                                    onMouseOver={() => setIsMouseOver(true)}
                                 />
                                 <TextField 
                                     value={updateNote.text}
@@ -84,45 +91,56 @@ const Note = ({ note }) => {
                                     InputProps={{ disableUnderline: false }}
                                     onChange={(e) => onTextChange(e)}
                                     name='text'
+                                    onMouseOver={() => setIsMouseOver(true)}
                                 />
                             </>
                         }
                     </CardContent> 
-                    <Options>
-                        { !isEditing ?
+                    <Options onMouseUp={() => setIsMouseOver(true)}>
+                        { isMouseOver ?
+                            <>
+                            { !isEditing ?
                         
-                            <Edit 
+                        <Edit 
+                            fontSize='medium'
+                            style={{ marginLeft: 'auto' }}
+                            onClick={() => editNote(note)}
+                            onMouseEnter={() => setIsMouseOver(true)}
+                        /> : 
+                        <>
+                            <label style={{marginLeft: '10px'}}
+                            onMouseEnter={() => setIsMouseOver(true)}>
+                                    <ColorLensOutlinedIcon/>
+                                    <input
+                                        type="color"
+                                        value={'blue'}
+                                        name='color'
+                                        onChange={(e) => onTextChange(e)}
+                                        style={{visibility:'hidden', border: '0', borderRadius: '100%', backgroundColor: 'transparent', width: '25px', }}
+                                    />
+                            </label>
+                            <Save
                                 fontSize='medium'
                                 style={{ marginLeft: 'auto' }}
-                                onClick={() => editNote(note)}
-                            /> : 
-                            <>
-                                <label style={{marginLeft: '10px'}}>
-                                        <ColorLensOutlinedIcon/>
-                                        <input
-                                            type="color"
-                                            value={'blue'}
-                                            name='color'
-                                            onChange={(e) => onTextChange(e)}
-                                            style={{visibility:'hidden', border: '0', borderRadius: '100%', backgroundColor: 'transparent', width: '25px', }}
-                                        />
-                                </label>
-                                <Save
-                                    fontSize='medium'
-                                    style={{ marginLeft: 'auto' }}
-                                    onClick={() => saveNote(note)}
-                                />
-                            </>
-                            
-                        }
-                        <Archive 
+                                onClick={() => saveNote(note)}
+                                onMouseEnter={() => setIsMouseOver(true)}
+                            />
+                        </>
+                        
+                    }
+                    <Archive 
                             fontSize="medium"  
-                            onClick={() => archiveNote(note)}
+                            onMouseEnter={() => setIsMouseOver(true)}
                         />
                         <Delete 
                             fontSize="medium"
                             onClick={() => deleteNote(note)}
+                            onMouseEnter={() => setIsMouseOver(true)}
                         />
+                            </> : <div style={{height: '23px'}}></div>
+                        }
+                        
+                        
                     </Options>
             </StyledCard>
     )

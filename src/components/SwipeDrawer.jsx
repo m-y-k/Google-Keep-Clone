@@ -54,10 +54,10 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 );
 
 function SwipeDrawer() {
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState(false);
     
     const handleDrawer = () => {
-        setOpen(prevState => !prevState);
+        setOpen(!open);
     };
 
     return (

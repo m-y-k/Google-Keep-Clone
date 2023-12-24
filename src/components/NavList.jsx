@@ -1,16 +1,17 @@
 
 
-import { List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
-import { LightbulbOutlined as Lightbulb, ArchiveOutlined as Archive, DeleteOutlineOutlined as Delete } from '@mui/icons-material';
-import { Link } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
+import { Box, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
+import { CreateOutlined as EditLabels, NotificationsNoneOutlined as Reminders, LightbulbOutlined as Lightbulb, ArchiveOutlined as Archive, DeleteOutlineOutlined as Delete } from '@mui/icons-material';
+import './navList.css'
 
 const NavList = () => {
 
     const navList = [
-        { id: 1, name: 'Notes', icon: <Lightbulb />, route: '/' },
-        { id: 2, name: 'Archives', icon: <Archive />, route: '/archive' },
-        { id: 3, name: 'Trash', icon: <Delete />, route: '/delete' },
+        { id: 1, name: 'Notes', icon: <Lightbulb /> },
+        { id: 2, name: 'Reminders', icon: <Reminders /> },
+        { id: 3, name: 'Edit labels', icon: <EditLabels /> },
+        { id: 4, name: 'Archives', icon: <Archive /> },
+        { id: 5, name: 'Trash', icon: <Delete /> },
     ]
     
     return (
@@ -18,12 +19,12 @@ const NavList = () => {
         {
             navList.map(list => (
                 <ListItem button key={list.id}>
-                    <Link to={`${list.route}`} style={{ textDecoration: 'none', display: 'flex', color: 'inherit'}}>
+                    <div className='navlist'>
                         <ListItemIcon style={{ alignItems: 'center'}}>
                             {list.icon}
                         </ListItemIcon>
                         <ListItemText primary={list.name}/> 
-                    </Link>
+                    </div>
                 </ListItem>
             ))
         }

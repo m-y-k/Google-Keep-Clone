@@ -1,12 +1,14 @@
 import { useState, useRef, useContext } from 'react';
 import './form.css'
-import ColorLensOutlinedIcon from '@mui/icons-material/ColorLensOutlined';
+import { ColorLensOutlined as Color, CheckBoxOutlined as CheckBox, BrushOutlined as Brush, 
+    ImageOutlined as Image, AddAlertOutlined as Alert, PersonAddAltOutlined as Person,
+     MoreVertOutlined as More, ArchiveOutlined as Archive, PushPinOutlined as Pin } from '@mui/icons-material';
 import { Box, TextField, ClickAwayListener } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { v4 as uuid } from 'uuid';
 
 import { DataContext } from '../../context/DataProvider';
-import { Visibility } from '@mui/icons-material';
+import { useMediaQuery } from 'react-responsive';
 
 const Container = styled(Box)`
     display: flex;
@@ -30,7 +32,7 @@ const Form = () => {
 
     const [showTextField, setShowTextField] = useState(false);
     const [addNote, setAddNote] = useState({ ...note, id: uuid() });
-
+    const isMobile900 = useMediaQuery({ query: `(max-width: 900px)` });
     const { setNotes } = useContext(DataContext);
     
     const containerRef = useRef();
@@ -45,6 +47,11 @@ const Form = () => {
         }
     }
     
+    const closeForm = () => {
+        setShowTextField(false);
+        containerRef.current.style.minheight = '30px'
+    }
+
     const onTextAreaClick = () => {
         setShowTextField(true);
         containerRef.current.style.minheight = '70px'
@@ -59,41 +66,64 @@ const Form = () => {
         <ClickAwayListener onClickAway={handleClickAway}>
             <Container ref={containerRef} style={{marginBottom: '50px', marginTop: '20px'}}>
                 {   showTextField && 
-                    <TextField 
-                        placeholder="Title"
+                    <div className='title_field'>
+                        <TextField 
+                            placeholder="Title"
+                            variant="standard"
+                            InputProps={{ disableUnderline: true }}
+                            style={{ marginBottom: 10 }}
+                            onChange={(e) => onTextChange(e)}
+                            name='heading'
+                            value={addNote.heading}
+                        />
+                        <Pin style={{color: '#757575'}} />
+                    </div>
+                }
+                <div className='textfield_raw'>
+                    <TextField
+                        placeholder="Take a note..."
+                        multiline
+                        maxRows={Infinity}
                         variant="standard"
                         InputProps={{ disableUnderline: true }}
-                        style={{ marginBottom: 10 }}
+                        onClick={onTextAreaClick}
                         onChange={(e) => onTextChange(e)}
-                        name='heading'
-                        value={addNote.heading}
+                        name='text'
+                        value={addNote.text}
                     />
-                }
-                <TextField
-                    placeholder="Take a note..."
-                    multiline
-                    maxRows={Infinity}
-                    variant="standard"
-                    InputProps={{ disableUnderline: true }}
-                    onClick={onTextAreaClick}
-                    onChange={(e) => onTextChange(e)}
-                    name='text'
-                    value={addNote.text}
-                />
+                    {!showTextField &&
+                        <div className='textfield_icons'>
+                            <CheckBox />
+                            <Brush />
+                            <Image />
+                        </div>
+                    }
+                    
+                </div>
                 {   showTextField && 
-                    <Box className='color_choose'>
-                        <label>
-                            <ColorLensOutlinedIcon/>
-                            <input
-                                type="color"
-                                value={'blue'}
-                                name='color'
-                                onChange={(e) => onTextChange(e)}
-                                style={{ visibility:'hidden', border: '0', borderRadius: '100%', backgroundColor: 'transparent', width: '25px' }}
-                            />
-                        </label>
-                        
-                    </Box>
+                    <div style={{display: 'flex', alignItems: 'center'}}>
+                        <Box className='color_choose'>
+                                {!isMobile900 && <Alert style={{fontSize: '1rem'}}/>}
+                                <Person style={{fontSize: '1rem'}}/>                              
+                                <Image style={{fontSize: '1rem'}}/>
+                                {!isMobile900 && <><Archive style={{fontSize: '1rem'}}/>
+                                    <More style={{fontSize: '1rem'}}/></>
+                                }                               
+                                <label className='color_div'>
+                                    <Color style={{fontSize: '1rem'}}/>
+                                    <input
+                                        type="color"
+                                        value={'blue'}
+                                        name='color'
+                                        onChange={(e) => onTextChange(e)}
+                                        style={{ visibility:'hidden', border: '0', borderRadius: '100%', backgroundColor: 'transparent', width: '25px' }}
+                                    />
+                                </label>
+                        </Box>
+                        <div className='close_btn'
+                            onClick={() => closeForm()}
+                        >Close</div>
+                    </div>
                 }
             </Container>
         </ClickAwayListener>

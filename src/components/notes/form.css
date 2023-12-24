@@ -2,6 +2,55 @@
     display: flex;
     align-items: center;
     margin: 10px; 
+    gap: 22px;
+    color: #4A4A4A;
+    margin-right: auto;
+    margin-bottom: 0px;
+    margin-left: 0;
+}
+
+.icon_size {
+    font-size: 0.8rem;
+}
+
+.textfield_raw, .color_div {
+    display: flex;
+    align-items: center;
+}
+
+/* .open_textfield_icons {
+    display: flex;
+    
+} */
+
+.title_field {
+    display: flex;
+    justify-content: space-between;
+}
+
+.textfield_icons {
+    display: flex;
+    gap: 16px;
     margin-left: auto;
-    /* font-weight: 600; */
+    color: #757575;
+}
+
+.close_btn {
+    font-size: 0.9rem;
+    margin-top: 10px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    /* border: 2px solid #8a84e6; */
+    color: #3b3b3b;
+    box-shadow: 2px 2px #82c979c4;
+    border-radius: 10px;
+    padding: 4px 8px;
+    background-image: linear-gradient(to right, rgba(240, 116, 116, 0.322), rgba(137, 234, 89, 0.847));
+    /* background-color: #e7a6c2; */
+}
+
+.close_btn:hover {
+    cursor: pointer;
+    scale: 1.02;
+    transition: 0.1s smooth all;
 }
