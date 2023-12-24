@@ -8,7 +8,7 @@ import './drawer.css'
 import HeaderBar from './HeaderBar';
 import NavList from './NavList';
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 const openedMixin = (theme) => ({
     width: drawerWidth,

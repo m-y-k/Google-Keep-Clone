@@ -15,20 +15,20 @@ const NavList = () => {
     ]
     
     return (
-        <List>
+        <div className='navlist'>
         {
             navList.map(list => (
-                <ListItem button key={list.id}>
-                    <div className='navlist'>
-                        <ListItemIcon style={{ alignItems: 'center'}}>
+                // <ListItem button >
+                    <div className='list-item' key={list.id}>
+                        <ListItemIcon className='list-icon'>
                             {list.icon}
                         </ListItemIcon>
                         <ListItemText primary={list.name}/> 
                     </div>
-                </ListItem>
+                // </ListItem>
             ))
         }
-        </List>
+        </div>
     )
 }
 
