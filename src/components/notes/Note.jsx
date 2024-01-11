@@ -107,12 +107,12 @@ const Note = ({ note, width }) => {
                         
                         <Edit 
                             fontSize='medium'
-                            style={{ marginLeft: 'auto' }}
+                            style={{ marginLeft: 'auto', color: '#4A4A4A' }}
                             onClick={() => editNote(note)}
                             onMouseEnter={() => setIsMouseOver(true)}
                         /> : 
                         <>
-                            <label style={{marginLeft: '10px'}}
+                            <label style={{marginLeft: '10px', color: '#4A4A4A'}}
                             onMouseEnter={() => setIsMouseOver(true)}>
                                     <ColorLensOutlinedIcon/>
                                     <input
@@ -125,7 +125,7 @@ const Note = ({ note, width }) => {
                             </label>
                             <Save
                                 fontSize='medium'
-                                style={{ marginLeft: 'auto' }}
+                                style={{ marginLeft: 'auto', color: '#4A4A4A' }}
                                 onClick={() => saveNote(note)}
                                 onMouseEnter={() => setIsMouseOver(true)}
                             />
@@ -135,11 +135,13 @@ const Note = ({ note, width }) => {
                     <Archive 
                             fontSize="medium"  
                             onMouseEnter={() => setIsMouseOver(true)}
+                            style={{color: '#4A4A4A'}}
                         />
                         <Delete 
                             fontSize="medium"
                             onClick={() => deleteNote(note)}
                             onMouseEnter={() => setIsMouseOver(true)}
+                            style={{color: '#4A4A4A'}}
                         />
                             </> : <div style={{height: '23px'}}></div>
                         }

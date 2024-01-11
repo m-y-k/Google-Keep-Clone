@@ -12,7 +12,7 @@ console.log(notes)
     >
       {searchNotes.map((value) => {
         return (
-          <div className='list-item'
+          <div className='list-item-lists'
             key={value.id}
           >
             <Note note={value} />

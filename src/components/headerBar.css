@@ -21,6 +21,19 @@
     gap: 1rem;
 }
 
+.hover {
+    cursor: pointer;
+}
+
+.hover:hover {
+    /* border: 0.1px solid #A5A8A7; */
+    padding: 5px;
+    transition: 0.1s smooth all;
+    background-color: rgba(230, 226, 226, 0.386);
+    border-radius: 50%;
+    scale: 1.5;
+}
+
 .search_bar {
     display: flex;
   align-items: center;

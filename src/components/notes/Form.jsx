@@ -72,12 +72,12 @@ const Form = () => {
                             placeholder="Title"
                             variant="standard"
                             InputProps={{ disableUnderline: true }}
-                            style={{ marginBottom: 10 }}
+                            style={{ marginBottom: 10, width: '100%' }}
                             onChange={(e) => onTextChange(e)}
                             name='heading'
                             value={addNote.heading}
                         />
-                        <Pin style={{color: '#757575'}} />
+                        <Pin className='hover' style={{color: '#757575'}} />
                     </div>
                 }
                 <div className='textfield_raw'>
@@ -91,12 +91,13 @@ const Form = () => {
                         onChange={(e) => onTextChange(e)}
                         name='text'
                         value={addNote.text}
+                        style={{ width: '100%' }}
                     />
                     {!showTextField &&
                         <div className='textfield_icons'>
-                            <CheckBox />
-                            <Brush />
-                            <Image />
+                            <CheckBox className='hover-form' />
+                            <Brush className='hover-form' />
+                            <Image className='hover-form' />
                         </div>
                     }
                     
@@ -104,14 +105,14 @@ const Form = () => {
                 {   showTextField && 
                     <div style={{display: 'flex', alignItems: 'center'}}>
                         <Box className='color_choose'>
-                                {!isMobile900 && <Alert style={{fontSize: '1rem'}}/>}
-                                <Person style={{fontSize: '1rem'}}/>                              
-                                <Image style={{fontSize: '1rem'}}/>
-                                {!isMobile900 && <><Archive style={{fontSize: '1rem'}}/>
-                                    <More style={{fontSize: '1rem'}}/></>
+                                {!isMobile900 && <Alert className='hover-form-open' style={{fontSize: '1rem'}}/>}
+                                <Person className='hover-form-open' style={{fontSize: '1rem'}}/>                              
+                                <Image className='hover-form-open' style={{fontSize: '1rem'}}/>
+                                {!isMobile900 && <><Archive className='hover-form-open' style={{fontSize: '1rem'}}/>
+                                    <More className='hover-form-open' style={{fontSize: '1rem'}}/></>
                                 }                               
                                 <label className='color_div'>
-                                    <Color style={{fontSize: '1rem'}}/>
+                                    <Color className='hover-form-open' style={{fontSize: '1rem'}}/>
                                     <input
                                         type="color"
                                         value={'blue'}

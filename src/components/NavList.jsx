@@ -23,7 +23,7 @@ const NavList = () => {
                         <ListItemIcon className='list-icon'>
                             {list.icon}
                         </ListItemIcon>
-                        <ListItemText primary={list.name}/> 
+                        <ListItemText className='list-item-text' primary={list.name}/> 
                     </div>
                 // </ListItem>
             ))

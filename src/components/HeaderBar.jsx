@@ -69,14 +69,14 @@ const HeaderBar = ({ open, handleDrawer }) => {
         </Container>
         <div className='icons_header'>
           <div className="icons">
-            <Refresh className='hide_till_800'/>
+            <Refresh className='hide_till_800 hover'/>
             {
-              isGrid ? <List onClick={() => {setIsGrid(false)}}/> : <Grid onClick={() => {setIsGrid(true)}}/>
+              isGrid ? <List className=' hover' onClick={() => {setIsGrid(false)}}/> : <Grid className=' hover' onClick={() => {setIsGrid(true)}}/>
             }   
-            <Settings className='hide_till_800'/>
+            <Settings className='hide_till_800 hover'/>
           </div>
           <div className="profile">
-            <Apps className='hide_till_800'/>
+            <Apps className='hide_till_800 hover'/>
             <img src={dp} alt="DP" style={{width: 31, borderRadius: '50%'}} />
           </div>
         </div>
